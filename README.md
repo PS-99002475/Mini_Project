@@ -2,7 +2,7 @@
 ## SoulLock - Automatic doorlock based on human presence
 > -
 > -
-> - Contributors:
+> -
 
 | Contributor  | PS number    | 
 |--------------|--------------|
