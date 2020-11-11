@@ -59,9 +59,9 @@ int main()
         fseek(soulsens,0,SEEK_SET);
         fseek(dopinval,0,SEEK_SET);
         fseek(dspinval,0,SEEK_SET);
-        if(&soulsens == 1)
+        if(soulsens)
             {
-                kprintf("Presense of human detected----Door opening\n");
+                printf("Presense of human detected----Door opening\n");
                 fprintf(dopinval,"%d",1);
                 fflush(dopinval);
                 delay(5);
@@ -69,9 +69,9 @@ int main()
                 fflush(dopinval);
                 delay(10);
                 fseek(soulsens,0,SEEK_SET);
-                if(&soulsens == 0)
+                if(soulsens)
                 {
-                    kprintf("Human assumed to have exited----Door closing\n");
+                    printf("Human assumed to have exited----Door closing\n");
                     fprintf(dspinval,"%d",1);
                     fflush(dspinval);
                     delay(7);
@@ -82,8 +82,7 @@ int main()
                 {
                     fprintf(dspinval,"%d",0);
                     fflush(dspinval);
-                }
-                
+                }               
 
             }
         else
