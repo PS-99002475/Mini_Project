@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 /*
  *gpio_26 - clockwise(open):Relay1:output
@@ -58,7 +59,7 @@ int main()
         fseek(soulsens,0,SEEK_SET);
         fseek(dopinval,0,SEEK_SET);
         fseek(dspinval,0,SEEK_SET);
-        if(soulsens == 1)
+        if(&soulsens == 1)
             {
                 kprintf("Presense of human detected----Door opening\n");
                 fprintf(dopinval,"%d",1);
@@ -68,7 +69,7 @@ int main()
                 fflush(dopinval);
                 delay(10);
                 fseek(soulsens,0,SEEK_SET);
-                if(soulsens == 0)
+                if(&soulsens == 0)
                 {
                     kprintf("Human assumed to have exited----Door closing\n");
                     fprintf(dspinval,"%d",1);
