@@ -37,7 +37,7 @@ int main()
     fflush(dspindir);
 
     dspinval = fopen("/sys/class/gpio/gpio44/value", "w");
-    fseek(dispinval,0,SEEK_SET);
+    fseek(dspinval,0,SEEK_SET);
 
     sspin = fopen("/sys/class/gpio/export", "w");
     fseek(sspin,0,SEEK_SET);
@@ -55,35 +55,50 @@ int main()
 
     while(1)
     {
-        fprintf(soulsens,"%d",1);
-        fflush(soulsens);
-        sleep(1);
-        fprintf(soulsens,"%d",0);
-        fflush(soulsens);
-        sleep(1);
+        fseek(soulsens,0,SEEK_SET);
+        fseek(dopinval,0,SEEK_SET);
+        fseek(dspinval,0,SEEK_SET);
+        if(soulsens == 1)
+            {
+                kprintf("Presense of human detected----Door opening\n");
+                fprintf(dopinval,"%d",1);
+                fflush(dopinval);
+                delay(5);
+                fprintf(dopinval,"%d",0);
+                fflush(dopinval);
+                delay(10);
+                fseek(soulsens,0,SEEK_SET);
+                if(soulsens == 0)
+                {
+                    kprintf("Human assumed to have exited----Door closing\n");
+                    fprintf(dspinval,"%d",1);
+                    fflush(dspinval);
+                    delay(7);
+                    fprintf(dspinval,"%d",0);
+                    fflush(dspinval);                      
+                }
+                else
+                {
+                    fprintf(dspinval,"%d",0);
+                    fflush(dspinval);
+                }
+                
 
-        {
-fseek(pirin,0,SEEK_SET);
-fseek(bzrout,0,SEEK_SET);
-fscanf(pirin,"%d",&pir_val);
-printf("pir val = %d",pir_val);
-if(PIR_FLAG==1)
-{
-fprintf(bzrout,"%d",1);
-fflush(bzrout);
-delay(5);
-fprintf(bzrout,"%d",0);
-fflush(bzrout);
-PIR_FLAG=0;
-}
-if(PIR_FLAG==0 && pir_val=1)
-{
-PIR_FLAG=1;
-}
+            }
+        else
+            {
+                fprintf(dopinval,"%d",0);
+                fflush(dopinval);
+            }
+        fclose(dropen);
+        fclose(dopindir);
+        fclose(dopinval);
+        fclose(drshut);
+        fclose(dspindir);
+        fclose(dspinval);
+        fclose(sspin);
+        fclose(sspindir);
+        fclose(soulsens);
+        return 0;
     }
-
-    fclose(dropen);
-    fclose(dopindir);
-    fclose(soulsens);
-    return 0;
 }
