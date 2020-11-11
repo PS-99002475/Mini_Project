@@ -26,6 +26,25 @@ int main()
         fprintf(soulsens,"%d",0);
         fflush(soulsens);
         sleep(1);
+
+        {
+fseek(pirin,0,SEEK_SET);
+fseek(bzrout,0,SEEK_SET);
+fscanf(pirin,"%d",&pir_val);
+printf("pir val = %d",pir_val);
+if(PIR_FLAG==1)
+{
+fprintf(bzrout,"%d",1);
+fflush(bzrout);
+delay(5);
+fprintf(bzrout,"%d",0);
+fflush(bzrout);
+PIR_FLAG=0;
+}
+if(PIR_FLAG==0 && pir_val=1)
+{
+PIR_FLAG=1;
+}
     }
 
     fclose(io);
