@@ -3,10 +3,11 @@
 > -
 > -
 > - Contributors:
+
     | Contributors | PS number |
-    | ------------ | --------- |
-    | Bibek        | 99002473  |
-    | Chandana     | 99002475  |
-    | Tapaswini    | 99002505  |
+    | --- | --- |
+    | Bibek | 99002473 |
+    | Chandana | 99002475 |
+    | Tapaswini | 99002505 |
  
 
