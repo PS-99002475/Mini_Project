@@ -70,6 +70,9 @@ int main()
 
     while(1)
     {
+        soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
+        dopinval = fopen("/sys/class/gpio/gpio26/value", "w");
+        dspinval = fopen("/sys/class/gpio/gpio44/value", "w");
         fseek(soulsens,0,SEEK_SET);
         fseek(dopinval,0,SEEK_SET);
         fseek(dspinval,0,SEEK_SET);
@@ -79,6 +82,7 @@ int main()
                 fprintf(dopinval,"%d",1);
                 fflush(dopinval);
                 delay(5);
+                dopinval = fopen("/sys/class/gpio/gpio26/value", "w");
                 fprintf(dopinval,"%d",0);
                 fflush(dopinval);
                 delay(10);
@@ -89,6 +93,7 @@ int main()
                     fprintf(dspinval,"%d",1);
                     fflush(dspinval);
                     delay(7);
+                    dspinval = fopen("/sys/class/gpio/gpio44/value", "w");
                     fprintf(dspinval,"%d",0);
                     fflush(dspinval);                      
                 }
@@ -100,19 +105,19 @@ int main()
 
             }
         else
-            {
-                fprintf(dopinval,"%d",0);
-                fflush(dopinval);
-            }
-        fclose(dropen);
-        fclose(dopindir);
-        fclose(dopinval);
-        fclose(drshut);
-        fclose(dspindir);
-        fclose(dspinval);
-        fclose(sspin);
-        fclose(sspindir);
-        fclose(soulsens);
-        return 0;
+        {
+            fprintf(dopinval,"%d",0);
+            fflush(dopinval);
+        }
     }
+    fclose(dropen);
+    fclose(dopindir);
+    fclose(dopinval);
+    fclose(drshut);
+    fclose(dspindir);
+    fclose(dspinval);
+    fclose(sspin);
+    fclose(sspindir);
+    fclose(soulsens);
+    return 0;
 }
