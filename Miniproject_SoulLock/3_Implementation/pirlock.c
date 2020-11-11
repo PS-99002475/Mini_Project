@@ -1,19 +1,27 @@
 #include <stdio.h>
 
+/*
+ *gpio_26 - clockwise(open):Relay1:output
+ *gpio_44 - anticlockwise(close):Relay2:output
+ *gpio_68 - anticlockwise(sense):PIR:Input
+*/
 
 int main()
 {
-    FILE *io,*dooract,*soulsens;
+    FILE *dropen,*dopindir,*dopinval;
+    FILE *drshut,*dspindir,*dspinval;
+    FILE *soulsens,*sspindir,*sspinval;
 
-    io = fopen("/sys/class/gpio/export", "w");
-    fseek(io,0,SEEK_SET);
-    fprintf(io,"%d",39);
-    fflush(io);
 
-    dooract = fopen("/sys/class/gpio/gpio39/direction", "w");
-    fseek(dooract,0,SEEK_SET);
-    fprintf(dooract,"out");
-    fflush(dooract);
+    dropen = fopen("/sys/class/gpio/export", "w");
+    fseek(dropen,0,SEEK_SET);
+    fprintf(dropen,"%d",26);
+    fflush(dropen);
+
+    dopindir = fopen("/sys/class/gpio/gpio39/direction", "w");
+    fseek(dopindir,0,SEEK_SET);
+    fprintf(dopindir,"out");
+    fflush(dopindir);
 
     soulsens = fopen("/sys/class/gpio/gpio39/value", "w");
     fseek(soulsens,0,SEEK_SET);
@@ -47,8 +55,8 @@ PIR_FLAG=1;
 }
     }
 
-    fclose(io);
-    fclose(dooract);
+    fclose(dropen);
+    fclose(dopindir);
     fclose(soulsens);
     return 0;
 }
