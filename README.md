@@ -1,6 +1,6 @@
 # Mini Project for Embedded Specialisation track
-## SoulLock - Automatic doorlock based on human presence
-> -
+## SoulLock - Automatic doorlock and dooropener based on human presence
+> - 
 > -
 > -
 
