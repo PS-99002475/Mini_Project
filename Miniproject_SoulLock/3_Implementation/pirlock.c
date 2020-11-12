@@ -76,6 +76,7 @@ int main()
         fseek(soulsens,0,SEEK_SET);
         fseek(dopinval,0,SEEK_SET);
         fseek(dspinval,0,SEEK_SET);
+        printf(soulsens);
         if(soulsens)
             {
                 printf("Presense of human detected----Door opening\n");
