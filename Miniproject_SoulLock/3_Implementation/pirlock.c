@@ -37,6 +37,8 @@ int main()
     fseek(dopindir,0,SEEK_SET);
     fprintf(dopindir,"out");
     fflush(dopindir);
+    
+    
     dopinval = fopen("/sys/class/gpio/gpio26/value", "w");
     fseek(dopinval,0,SEEK_SET);
     
@@ -55,5 +57,21 @@ int main()
     dspinval = fopen("/sys/class/gpio/gpio44/value", "w");
     fseek(dspinval,0,SEEK_SET);
 
+/*
+    sspin = fopen("/sys/class/gpio/export", "w");
+    fseek(sspin,0,SEEK_SET);
+    fprintf(sspin,"%d",68);
+    fflush(sspin);
+*/
 
+
+    sspindir = fopen("/sys/class/gpio/gpio68/direction", "w");
+    fseek(sspindir,0,SEEK_SET);
+    fprintf(sspindir,"in");
+    fflush(sspindir);
+
+
+    soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
+    fseek(soulsens,0,SEEK_SET);
+    fscanf(soulsens, "%d", &soulval);
 
