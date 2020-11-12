@@ -26,7 +26,7 @@ int main()
     FILE *dropen,*dopindir,*dopinval;
     FILE *drshut,*dspindir,*dspinval;
     FILE *sspin,*sspindir,*soulsens;
-
+    int soulval;
 
     dropen = fopen("/sys/class/gpio/export", "w");
     fseek(dropen,0,SEEK_SET);
@@ -66,6 +66,7 @@ int main()
 
     soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
     fseek(soulsens,0,SEEK_SET);
+    fscanf(soulsens, "%d", soulval);
 
 
     while(1)
@@ -76,8 +77,9 @@ int main()
         fseek(soulsens,0,SEEK_SET);
         fseek(dopinval,0,SEEK_SET);
         fseek(dspinval,0,SEEK_SET);
-        printf(soulsens);
-        if(soulsens)
+        fscanf(soulsens, "%d", soulval);
+        printf("%d",soulval);
+        if(soulval == 1)
             {
                 printf("Presense of human detected----Door opening\n");
                 fprintf(dopinval,"%d",1);
@@ -88,7 +90,8 @@ int main()
                 fflush(dopinval);
                 delay(10);
                 fseek(soulsens,0,SEEK_SET);
-                if(soulsens)
+                fscanf(soulsens, "%d", soulval);
+                if(soulval == 1)
                 {
                     printf("Human assumed to have exited----Door closing\n");
                     fprintf(dspinval,"%d",1);
