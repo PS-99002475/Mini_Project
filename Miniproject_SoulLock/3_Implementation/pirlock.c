@@ -21,3 +21,22 @@ void delay(int number_of_seconds)
     // looping till required time is not achieved 
     while (clock() < start_time + milli_seconds); 
 }
+int main()
+{
+    FILE *dropen,*dopindir,*dopinval;
+    FILE *drshut,*dspindir,*dspinval;
+    FILE *sspin,*sspindir,*soulsens;
+    int soulval;
+/*
+    dropen = fopen("/sys/class/gpio/export", "w");
+    fseek(dropen,0,SEEK_SET);
+    fprintf(dropen,"%d",26);
+    fflush(dropen);
+*/
+    dopindir = fopen("/sys/class/gpio/gpio26/direction", "w");
+    fseek(dopindir,0,SEEK_SET);
+    fprintf(dopindir,"out");
+    fflush(dopindir);
+    dopinval = fopen("/sys/class/gpio/gpio26/value", "w");
+    fseek(dopinval,0,SEEK_SET);
+
