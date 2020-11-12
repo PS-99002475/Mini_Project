@@ -106,3 +106,17 @@ int main()
                     fprintf(dspinval,"%d",0);
                     fflush(dspinval);                      
                 }
+                else
+                {
+                    fprintf(dspinval,"%d",0);
+                    fflush(dspinval);
+                }               
+
+
+            }
+        else
+        {
+            fprintf(dopinval,"%d",0);
+            fflush(dopinval);
+        }
+    }
