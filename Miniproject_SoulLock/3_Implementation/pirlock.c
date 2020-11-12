@@ -63,7 +63,18 @@ int main()
     fprintf(sspin,"%d",68);
     fflush(sspin);
 */
-    while(1)
+
+    sspindir = fopen("/sys/class/gpio/gpio68/direction", "w");
+    fseek(sspindir,0,SEEK_SET);
+    fprintf(sspindir,"in");
+    fflush(sspindir);
+
+
+    soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
+    fseek(soulsens,0,SEEK_SET);
+    fscanf(soulsens, "%d", &soulval);
+
+     while(1)
     {
         soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
         dopinval = fopen("/sys/class/gpio/gpio26/value", "w");
@@ -85,15 +96,13 @@ int main()
                 delay(10);
                 fseek(soulsens,0,SEEK_SET);
                 fscanf(soulsens, "%d", &soulval);
-
-
-    sspindir = fopen("/sys/class/gpio/gpio68/direction", "w");
-    fseek(sspindir,0,SEEK_SET);
-    fprintf(sspindir,"in");
-    fflush(sspindir);
-
-
-    soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
-    fseek(soulsens,0,SEEK_SET);
-    fscanf(soulsens, "%d", &soulval);
-
+                if(soulval == 1)
+                {
+                    printf("Human assumed to have exited----Door closing\n");
+                    fprintf(dspinval,"%d",1);
+                    fflush(dspinval);
+                    delay(7);
+                    dspinval = fopen("/sys/class/gpio/gpio44/value", "w");
+                    fprintf(dspinval,"%d",0);
+                    fflush(dspinval);                      
+                }
