@@ -66,7 +66,7 @@ int main()
 
     soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
     fseek(soulsens,0,SEEK_SET);
-    fscanf(soulsens, "%d", soulval);
+    fscanf(soulsens, "%d", &soulval);
 
 
     while(1)
@@ -77,7 +77,7 @@ int main()
         fseek(soulsens,0,SEEK_SET);
         fseek(dopinval,0,SEEK_SET);
         fseek(dspinval,0,SEEK_SET);
-        fscanf(soulsens, "%d", soulval);
+        fscanf(soulsens, "%d", &soulval);
         printf("%d",soulval);
         if(soulval == 1)
             {
@@ -90,7 +90,7 @@ int main()
                 fflush(dopinval);
                 delay(10);
                 fseek(soulsens,0,SEEK_SET);
-                fscanf(soulsens, "%d", soulval);
+                fscanf(soulsens, "%d", &soulval);
                 if(soulval == 1)
                 {
                     printf("Human assumed to have exited----Door closing\n");
