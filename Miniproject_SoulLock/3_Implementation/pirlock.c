@@ -120,3 +120,14 @@ int main()
             fflush(dopinval);
         }
     }
+    fclose(dropen);
+    fclose(dopindir);
+    fclose(dopinval);
+    fclose(drshut);
+    fclose(dspindir);
+    fclose(dspinval);
+    fclose(sspin);
+    fclose(sspindir);
+    fclose(soulsens);
+    return 0;
+}
