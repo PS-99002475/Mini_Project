@@ -5,7 +5,7 @@
 /*
  *gpio_26 - clockwise(open):Relay1:output
  *gpio_44 - anticlockwise(close):Relay2:output
- *gpio_68 - anticlockwise(sense):PIR:Input
+ *gpio_68 - PIRinputdata(sense):PIR:Input
 */
 
 void delay(int number_of_seconds) 
