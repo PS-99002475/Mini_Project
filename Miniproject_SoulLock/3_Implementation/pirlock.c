@@ -23,7 +23,9 @@ void delay(int number_of_seconds)
 
 int main()
 {
-    FILE *dropen,*dopindir,*dopinval;
+    printf("test point 1\n");
+    FILE *dropen;
+    FILE *dopindir,*dopinval;
     FILE *drshut,*dspindir,*dspinval;
     FILE *sspin,*sspindir,*soulsens;
     int soulval;
@@ -41,10 +43,10 @@ int main()
     dopinval = fopen("/sys/class/gpio/gpio26/value", "w");
     fseek(dopinval,0,SEEK_SET);
 
-    drshut = fopen("/sys/class/gpio/export", "w");
+    /*drshut = fopen("/sys/class/gpio/export", "w");
     fseek(drshut,0,SEEK_SET);
     fprintf(drshut,"%d",44);
-    fflush(drshut);
+    fflush(drshut);*/
 
     dspindir = fopen("/sys/class/gpio/gpio44/direction", "w");
     fseek(dspindir,0,SEEK_SET);
@@ -54,31 +56,34 @@ int main()
     dspinval = fopen("/sys/class/gpio/gpio44/value", "w");
     fseek(dspinval,0,SEEK_SET);
 
-    sspin = fopen("/sys/class/gpio/export", "w");
+    /*sspin = fopen("/sys/class/gpio/export", "w");
     fseek(sspin,0,SEEK_SET);
     fprintf(sspin,"%d",68);
-    fflush(sspin);
+    fflush(sspin);*/
 
     sspindir = fopen("/sys/class/gpio/gpio68/direction", "w");
     fseek(sspindir,0,SEEK_SET);
     fprintf(sspindir,"in");
     fflush(sspindir);
 
-    soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
+    /*soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
     fseek(soulsens,0,SEEK_SET);
-    fscanf(soulsens, "%d", soulval);
-
-
+    fscanf(soulsens, "%d", &soulval);
+    */
+    printf("Test point 2\n");
     while(1)
     {
+        delay(1);
+        printf("Test point 2\n");
         soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
         dopinval = fopen("/sys/class/gpio/gpio26/value", "w");
         dspinval = fopen("/sys/class/gpio/gpio44/value", "w");
         fseek(soulsens,0,SEEK_SET);
         fseek(dopinval,0,SEEK_SET);
         fseek(dspinval,0,SEEK_SET);
-        fscanf(soulsens, "%d", soulval);
+        fscanf(soulsens, "%d", &soulval);
         printf("%d",soulval);
+        delay(1);
         if(soulval == 1)
             {
                 printf("Presense of human detected----Door opening\n");
@@ -89,8 +94,10 @@ int main()
                 fprintf(dopinval,"%d",0);
                 fflush(dopinval);
                 delay(10);
+                fflush(soulsens);
+                soulsens = fopen("/sys/class/gpio/gpio68/value", "w");
                 fseek(soulsens,0,SEEK_SET);
-                fscanf(soulsens, "%d", soulval);
+                fscanf(soulsens, "%d", &soulval);
                 if(soulval == 1)
                 {
                     printf("Human assumed to have exited----Door closing\n");
@@ -106,21 +113,22 @@ int main()
                     fprintf(dspinval,"%d",0);
                     fflush(dspinval);
                 }               
-
             }
         else
         {
             fprintf(dopinval,"%d",0);
             fflush(dopinval);
         }
+        printf("Test point 4");
+        delay(1);
     }
-    fclose(dropen);
+    //fclose(dropen);
     fclose(dopindir);
     fclose(dopinval);
-    fclose(drshut);
+    //fclose(drshut);
     fclose(dspindir);
     fclose(dspinval);
-    fclose(sspin);
+    //fclose(sspin);
     fclose(sspindir);
     fclose(soulsens);
     return 0;
