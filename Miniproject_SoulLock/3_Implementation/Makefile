@@ -1,7 +1,8 @@
+
 final:
-    gcc pirlock.c -o soullock
+	gcc pirlock.c -o soullock
 run:
-    ./soullock
+	./soullock
 clean:
-    rm*.out
+	rm*.out
  
